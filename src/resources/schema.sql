@@ -1,0 +1,6 @@
+CREATE TABLE contatos(
+	id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL,
+	telefone VARCHAR(15) NOT NULL,
+	email VARCHAR(255)
+);

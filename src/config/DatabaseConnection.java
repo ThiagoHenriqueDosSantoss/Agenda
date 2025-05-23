@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conn {
+public class DatabaseConnection {
     private static String url = "jdbc:postgresql://localhost:5432/agenda";
     private static String user = "postgre";
     private static String password = "123";

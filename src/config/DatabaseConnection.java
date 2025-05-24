@@ -7,17 +7,12 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
     private static String url = "jdbc:postgresql://localhost:5432/agenda";
-    private static String user = "postgre";
-    private static String password = "123";
+    private static String user = "admin";
+    private static String password = "admin";
 
-    public static Connection conectar() {
-        try {
+    public static Connection conectar() throws SQLException {
             Connection conn = DriverManager.getConnection(url, user, password);
             System.out.println("Conexão estabelecida com sucesso!");
             return conn;
-        } catch (SQLException e) {
-            System.out.println("Erro ao conectar: " + e.getMessage());
-        }
-        return null;
     }
 }

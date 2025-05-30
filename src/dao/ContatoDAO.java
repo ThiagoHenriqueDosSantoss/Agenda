@@ -49,4 +49,27 @@ public class ContatoDAO {
 
         return contatos;
     }
+    public Contato buscarPorNome(String nome) throws SQLException{
+        Contato contato = new Contato();
+        String sql = "SELECT * FROM contatos WHERE nome = ?;";
+        List<Contato> contatos = new ArrayList<>();
+
+        Connection conn = DatabaseConnection.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,nome);
+        ResultSet rs = stmt.executeQuery();
+
+        while(rs.next()) {
+
+            contato.setId(rs.getInt("id"));
+            contato.setNome(rs.getString("nome"));
+            contato.setTelefone(rs.getString("telefone"));
+            contato.setEmail(rs.getString("email"));
+
+            contatos.add(contato);
+        }
+        stmt.close();
+        conn.close();
+        return contato;
+    }
 }

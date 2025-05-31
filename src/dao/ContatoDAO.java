@@ -72,4 +72,27 @@ public class ContatoDAO {
         conn.close();
         return contato;
     }
+    public List<Contato> listarOrdenadoPorNome() throws SQLException{
+        String sql = "SELECT * FROM contatos ORDER BY nome ASC;";
+        List<Contato> contatos = new ArrayList<>();
+
+        Connection conn = DatabaseConnection.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+
+
+        while(rs.next()) {
+            Contato contato = new Contato();
+            contato.setId(rs.getInt("id"));
+            contato.setNome(rs.getString("nome"));
+            contato.setTelefone(rs.getString("telefone"));
+            contato.setEmail(rs.getString("email"));
+
+            contatos.add(contato);
+        }
+        stmt.close();
+        conn.close();
+
+        return contatos;
+    }
 }

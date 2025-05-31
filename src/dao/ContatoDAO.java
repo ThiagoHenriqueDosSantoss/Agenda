@@ -110,4 +110,30 @@ public class ContatoDAO {
         conn.close();
         stmt.close();
     }
+    public List<Contato> listarEmailPorDominio(String dominio) throws SQLException{
+        String sql = "SELECT * FROM contatos WHERE email ILIKE ?;";
+        List<Contato> contatos = new ArrayList<>();
+
+        Connection conn = DatabaseConnection.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql);
+
+        stmt.setString(1, "%@" + dominio);
+
+        ResultSet rs = stmt.executeQuery();
+
+        while(rs.next()) {
+            Contato contato = new Contato();
+            contato.setId(rs.getInt("id"));
+            contato.setNome(rs.getString("nome"));
+            contato.setTelefone(rs.getString("telefone"));
+            contato.setEmail(rs.getString("email"));
+
+            contatos.add(contato);
+        }
+        rs.close();
+        stmt.close();
+        conn.close();
+
+        return contatos;
+    }
 }

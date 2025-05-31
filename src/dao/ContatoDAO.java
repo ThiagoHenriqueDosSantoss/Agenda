@@ -95,4 +95,19 @@ public class ContatoDAO {
 
         return contatos;
     }
+    public void atualizarEmail(int id, Contato contato) throws SQLException{
+        String sql = "UPDATE contatos SET email = ? WHERE id = ?;";
+        List<Contato> contatos = new ArrayList<>();
+
+        Connection conn = DatabaseConnection.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql);
+
+        stmt.setString(1, contato.getEmail());
+        stmt.setInt(2, id);
+
+        stmt.executeUpdate();
+
+        conn.close();
+        stmt.close();
+    }
 }
